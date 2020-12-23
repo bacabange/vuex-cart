@@ -1,28 +1,41 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <div class="container">
+      <div class="row my-4">
+        <div class="col-md-6">
+          <products title="Products" @receive="receiveMessage" />
+        </div>
+        <div class="col-md-6">
+          <cart />
+        </div>
+
+        <div class="col-md-12 mt-4" v-if="message">
+          <div class="alert alert-info">{{message}}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import Cart from './components/Cart.vue'
+  import Products from './components/Products.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  export default {
+    name: 'App',
+    data() {
+      return {
+        message: null
+      }
+    },
+    components: {
+      Cart,
+      Products
+    },
+    methods: {
+      receiveMessage(message){
+        this.message = message
+      }
+    }
   }
-}
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
